@@ -207,8 +207,53 @@ const db = mysql.createConnection(
   const chooseRequest = () => {
     inquier.prompt([
         {
-            type:
-        }
+            type: "list", 
+            name: "request",
+            message: "What would you like to do?",
+            choices: [
+                "Add a department",
+                "Add a role",
+                "Update employee",
+                "View departments",
+                "View employees",
+                "View roles",
+            ],
+            loop: false,
+        },
     ])
-  }
+    .then((data) => {
+        const {request} = data;
+        console.log(request);
+      //   Switch case
+      switch (request) {
+          case 'Add a Department':
+            newDept();
+            break;
+          case 'Add a Role':
+            newRole();
+            break;
+          case 'Add an Employee':
+            newEmp();
+            break;
+          case 'Update Employees Role':
+            updateEmployee();
+            break;
+          case 'View All Departments':
+            viewDepts();
+            break;
+          case 'View All Employees':
+            viewEmps();
+            break;
+          case 'View All Roles':
+            viewRoles();
+            break;                      
+      
+          default:
+              break;
+      }
+  })
+
+}
+
+chooseRequest();
 
