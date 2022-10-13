@@ -5,10 +5,9 @@ const choiceHelper = require('./library/choiceHelper');
 
 
 const PORT = process.env.PORT || 3001;
-const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
+
 
 
 
@@ -29,11 +28,11 @@ app.use(express.json());
             }
         },
     ])
+    sql.addDept(department);
+    chooseRequest();
   };
 
-  sql.addDept(department);
 
-  chooseRequest();
 
   const newEmp = async () => {
     const role = await choiceHelper.roleChoices();
@@ -84,11 +83,10 @@ app.use(express.json());
             loop: false,
         },
     ])
+    sql.addEmp(employee);
+    chooseRequest();
   };
 
-  sql.addEmp(employee);
-
-  chooseRequest();
 
   const newRole = async () => {
 
@@ -128,12 +126,11 @@ app.use(express.json());
             loop: false,
         }
     ])
+    sql.addRole(role);
+    chooseRequest();
   };
 
-  sql.addRole(role);
-  
-  chooseRequest();
-
+ 
   const updateEmployee = async () => {
     const roleArr = await choiceHelper.roleChoices();
 
@@ -155,11 +152,10 @@ app.use(express.json());
             loop: false,
         },
     ])
+    sql.updateEmployee(emp);
+    chooseRequest();
   };
 
-  sql.updateEmployee(emp);
-
-  chooseRequest();
 
   const viewDepts = () => {
     sql.getDepts()
