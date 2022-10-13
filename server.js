@@ -1,7 +1,8 @@
-const { strictEqual } = require('assert');
-const express = require('express');
+const inquirer = require("inquirer");
+const cTable = require("console.table");
+const sql = require('./db/query_lib');
+const choiceHelper = require('./library/choiceHelper');
 
-const mysql = require('mysql2');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -9,19 +10,11 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      user: 'root',
-      password: 'password1',
-      database: process.envDB_NAME
-    },
-    console.log(`Connected to database.`)
-  );
-  
+
+
   const newDept = async () => {
     
-    const department = await inquier.prompt([
+    const department = await inquirer.prompt([
         {
             type:"input",
             name:"name",
@@ -38,7 +31,7 @@ const db = mysql.createConnection(
     ])
   };
 
-  await sql.addDept(department);
+  sql.addDept(department);
 
   chooseRequest();
 
@@ -47,7 +40,7 @@ const db = mysql.createConnection(
 
     const management = await choiceHelper.managementChoices();
 
-    const employee = await inquier.prompt([
+    const employee = await inquirer.prompt([
         {
             type: "input",
             name: "First",
@@ -93,7 +86,7 @@ const db = mysql.createConnection(
     ])
   };
 
-  await sql.addEmp(employee);
+  sql.addEmp(employee);
 
   chooseRequest();
 
@@ -101,7 +94,7 @@ const db = mysql.createConnection(
 
     const Choices = await choiceHelper.departmentchoices();
 
-    const role = await inquier.prompt([
+    const role = await inquirer.prompt([
         {
             type: "input",
             name: "title",
@@ -137,7 +130,7 @@ const db = mysql.createConnection(
     ])
   };
 
-  await sql.addRole(role);
+  sql.addRole(role);
   
   chooseRequest();
 
@@ -146,7 +139,7 @@ const db = mysql.createConnection(
 
     const employees = await choiceHelper.employees();
 
-    const emp = await inquier.prompt([
+    const emp = await inquirer.prompt([
         {
             type: "list",
             name: "emp-id",
@@ -164,7 +157,7 @@ const db = mysql.createConnection(
     ])
   };
 
-  await sql.updateEmployee(emp);
+  sql.updateEmployee(emp);
 
   chooseRequest();
 
@@ -205,7 +198,7 @@ const db = mysql.createConnection(
   }
 
   const chooseRequest = () => {
-    inquier.prompt([
+    inquirer.prompt([
         {
             type: "list", 
             name: "request",

@@ -1,4 +1,4 @@
-const sql = require('../db/query-lib');
+const sql = require('../db/query_lib');
 
 const departmentchoices = async () => {
     const tempArr = await sql.getDepts();
