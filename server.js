@@ -213,7 +213,6 @@ const PORT = process.env.PORT || 3001;
     .then((data) => {
         const {request} = data;
         console.log(request);
-      //   Switch case
       switch (request) {
           case 'Add a Department':
             newDept();
